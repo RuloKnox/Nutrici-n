@@ -24,9 +24,13 @@ def get_db_connection():
 
 @app.get("/")
 def read_root():
+    return {"message": "Hello World", "status": "API functioning"}
+
+@app.get("/health")
+def health_check():
     conn = get_db_connection()
     if conn:
         conn.close()
-        return {"message": "Hello World", "db_status": "connected"}
+        return {"api": "ok", "database": "connected"}
     else:
-        return {"message": "Hello World", "db_status": "disconnected"}
+        return {"api": "ok", "database": "disconnected"}

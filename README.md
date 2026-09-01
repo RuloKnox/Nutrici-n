@@ -1,39 +1,43 @@
 # Proyecto de Nutrición
 
-Base técnica del proyecto de una aplicación de nutrición.
+Fundación base para una futura aplicación de nutrición.
 
-## Requisitos previos
+## Stack Actual
+- **Backend:** Python + FastAPI
+- **Base de Datos:** PostgreSQL
+- **Frontend:** React (próximamente)
 
+## Estructura
+- `/backend`: Servidor de la API.
+- `/frontend`: Carpeta preparada para el cliente.
+- `/docs`: Documentación del proyecto.
+
+## Requisitos Locales
 - Python 3.9+
-- PostgreSQL
-- Node.js (para el frontend futuro)
+- PostgreSQL local en ejecución
 
-## Configuración y ejecución local
+## Configuración
 
-### 1. Base de datos (PostgreSQL)
-Asegúrate de tener PostgreSQL instalado y en ejecución en tu máquina local.
-Puedes configurar las credenciales en el archivo `backend/.env` (basado en `backend/.env.example`).
+1. Duplica el archivo `backend/.env.example` y renómbralo a `backend/.env`.
+2. Actualiza los valores en `.env` con tus credenciales reales locales de PostgreSQL.
 
-### 2. Backend (FastAPI)
+## Cómo iniciar el backend
 
-1. Navega al directorio backend:
+1. Navega a la carpeta backend:
    ```bash
    cd backend
    ```
-2. Crea y activa un entorno virtual (opcional pero recomendado):
-   ```bash
-   python -m venv venv
-   # En Windows:
-   venv\Scripts\activate
-   # En macOS/Linux:
-   source venv/bin/activate
+2. Activa el entorno virtual:
+   ```powershell
+   .\venv\Scripts\activate
    ```
-3. Instala las dependencias:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Ejecuta el servidor de desarrollo:
+3. Ejecuta el servidor:
    ```bash
    uvicorn main:app --reload
    ```
-5. Verifica que funciona visitando `http://localhost:8000` en tu navegador.
+
+## Verificación
+
+Con el servidor corriendo, puedes visitar:
+- Raíz (API status): http://localhost:8000/
+- Health Check (API + DB status): http://localhost:8000/health
