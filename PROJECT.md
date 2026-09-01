@@ -27,3 +27,10 @@ Backend:
 ## Reglas de Git
 - Commits pequeños, descriptivos y centrados en la iteración actual.
 - No incluir secretos reales en el historial.
+
+## Motor Nutricional Base
+- **Fórmula BMR**: Mifflin-St Jeor (diferente para hombre y mujer).
+- **Cálculo de TDEE**: BMR * Factor de actividad.
+- **Unidades**: Peso en kg, Altura en cm, Edad en años.
+- **Factores de actividad**: Sedentario (1.2), Ligero (1.375), Moderado (1.55), Activo (1.725), Muy activo (1.9).
+- **Limitaciones Actuales**: El cálculo se hace bajo demanda (on-the-fly) sin persistencia en base de datos. No incluye ajustes por objetivos, macros o patologías médicas.

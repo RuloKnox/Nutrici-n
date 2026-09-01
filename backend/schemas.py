@@ -15,3 +15,9 @@ class PatientCreate(PatientBase):
 
 class PatientResponse(PatientBase):
     id: int
+
+class NutritionResponse(BaseModel):
+    age: int
+    bmi: float
+    bmr: float
+    tdee: float
