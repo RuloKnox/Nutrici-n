@@ -41,3 +41,12 @@ Fundación base para una futura aplicación de nutrición.
 Con el servidor corriendo, puedes visitar:
 - Raíz (API status): http://localhost:8000/
 - Health Check (API + DB status): http://localhost:8000/health
+- Documentación de API (Swagger): http://localhost:8000/docs (Aquí puedes probar la creación, listado y obtención de perfiles de pacientes).
+
+## Pruebas
+
+Para ejecutar las pruebas automatizadas del backend:
+```bash
+cd backend
+.\venv\Scripts\pytest
+```
