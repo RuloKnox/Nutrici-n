@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException, status
 from typing import List
-from schemas import PatientCreate, PatientResponse, NutritionResponse, TargetResponse
+from schemas import PatientCreate, PatientResponse, NutritionResponse, TargetResponse, DailyDietResponse
 from database import get_db_connection
-from nutrition_engine import calculate_nutrition_profile
 from target_calculator import generate_nutrition_target, GoalType
 from nutrition_engine import calculate_nutrition_profile
+from diet_generator import generate_daily_diet
 
 router = APIRouter(prefix="/patients", tags=["patients"])
 
@@ -106,6 +106,30 @@ def get_patient_nutrition_target(patient_id: int, goal: GoalType = GoalType.MAIN
             tdee = nutrition_data["tdee"]
             target_data = generate_nutrition_target(tdee, goal)
             return target_data
+        except ValueError as ve:
+            raise HTTPException(status_code=400, detail=str(ve))
+    finally:
+        conn.close()
+
+@router.get("/{patient_id}/diet", response_model=DailyDietResponse)
+def get_patient_diet(patient_id: int, goal: GoalType = GoalType.MAINTENANCE):
+    conn = get_db_connection()
+    if not conn:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT * FROM patients WHERE id = %s", (patient_id,))
+            patient = cur.fetchone()
+            if not patient:
+                raise HTTPException(status_code=404, detail="Patient not found")
+                
+        try:
+            nutrition_data = calculate_nutrition_profile(patient)
+            tdee = nutrition_data["tdee"]
+            target_data = generate_nutrition_target(tdee, goal)
+            diet_data = generate_daily_diet(target_data)
+            return diet_data
         except ValueError as ve:
             raise HTTPException(status_code=400, detail=str(ve))
     finally:

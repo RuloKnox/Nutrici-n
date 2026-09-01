@@ -43,3 +43,31 @@ class TargetResponse(BaseModel):
     goal: GoalTypeSchema
     target_calories: float
     macros: Macros
+
+class FoodSchema(BaseModel):
+    name: str
+    amount_g: float
+    calories: float
+    protein: float
+    carbs: float
+    fat: float
+
+class MealSchema(BaseModel):
+    name: str
+    foods: list[FoodSchema]
+    total_calories: float
+    total_protein: float
+    total_carbs: float
+    total_fat: float
+
+class DietTotals(BaseModel):
+    calories: float
+    protein: float
+    carbs: float
+    fat: float
+
+class DailyDietResponse(BaseModel):
+    target: TargetResponse
+    meals: list[MealSchema]
+    totals: DietTotals
+    diff: DietTotals

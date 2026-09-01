@@ -38,4 +38,8 @@ Backend:
   - Proteínas: 30% del objetivo calórico (4 kcal/g)
   - Grasas: 30% del objetivo calórico (9 kcal/g)
   - Carbohidratos: 40% del objetivo calórico (4 kcal/g)
-- **Limitaciones Actuales**: El cálculo se hace bajo demanda (on-the-fly) sin persistencia en base de datos. No incluye ajustes por objetivos, macros o patologías médicas.
+- **Generador de Dieta Mínimo**:
+  - Catálogo de alimentos en memoria (hardcoded) para la primera iteración.
+  - Estructura: 3 comidas (Desayuno, Comida, Cena).
+  - Estrategia: Asignación lineal determinista. Reparte los macros objetivo equitativamente entre las comidas y asigna alimentos puros de forma algorítmica para intentar cuadrar.
+- **Limitaciones Actuales**: El cálculo se hace bajo demanda (on-the-fly) sin persistencia en base de datos. No incluye ajustes por objetivos, macros, patologías médicas o catálogo completo de alimentos.
