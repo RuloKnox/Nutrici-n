@@ -36,14 +36,28 @@ Fundación base para una futura aplicación de nutrición.
    uvicorn main:app --reload
    ```
 
-## Verificación
+## Verificación y Ejecución Local
 
-Con el servidor corriendo, puedes visitar:
-- Raíz (API status): http://localhost:8000/
-- Health Check (API + DB status): http://localhost:8000/health
-- Documentación de API (Swagger): http://localhost:8000/docs (Aquí puedes probar la creación, listado y obtención de perfiles de pacientes).
+Para ejecutar el sistema completo en local, necesitas abrir dos terminales:
 
-## Pruebas
+### 1. Iniciar Backend (FastAPI)
+```bash
+cd backend
+.\venv\Scripts\python -m uvicorn main:app --reload
+```
+- **API URL:** http://localhost:8000
+- **Swagger Docs:** http://localhost:8000/docs
+*(Nota: Para probar el frontend, primero debes crear al menos un paciente usando el endpoint POST `/patients/` en Swagger).*
+
+### 2. Iniciar Frontend (React)
+```bash
+cd frontend
+npm run dev
+```
+- **Frontend URL:** http://localhost:5173
+- Aquí podrás visualizar el plan de 14 días.
+
+## Pruebas Backend
 
 Para ejecutar las pruebas automatizadas del backend:
 ```bash

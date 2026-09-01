@@ -41,5 +41,9 @@ Backend:
 - **Generador de Dieta Mínimo**:
   - Catálogo de alimentos en memoria (hardcoded) para la primera iteración.
   - Estructura: 3 comidas (Desayuno, Comida, Cena).
-  - Estrategia: Asignación lineal determinista. Reparte los macros objetivo equitativamente entre las comidas y asigna alimentos puros de forma algorítmica para intentar cuadrar.
-- **Limitaciones Actuales**: El cálculo se hace bajo demanda (on-the-fly) sin persistencia en base de datos. No incluye ajustes por objetivos, macros, patologías médicas o catálogo completo de alimentos.
+  - Estrategia: Asignación lineal determinista con rotación por día.
+  - Generador de 14 Días: Crea 14 dietas diarias utilizando patrones de comidas que rotan según el índice del día para ofrecer variedad, manteniendo el cuadre de macros.
+- **Frontend (React)**:
+  - Primer componente `PlanNutricional.jsx` para visualizar el plan de 14 días.
+  - Interfaz sin dependencias de diseño pesadas, priorizando limpieza y legibilidad de macros/alimentos.
+- **Limitaciones Actuales**: El cálculo se hace bajo demanda (on-the-fly) sin persistencia en base de datos. El UI asume un paciente con ID=1 por defecto (hardcoded) para la prueba inicial.

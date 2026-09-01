@@ -46,7 +46,7 @@ def create_meal(name: str, target_p: float, target_c: float, target_f: float, p_
         "total_fat": round(meal_f, 1)
     }
 
-def generate_daily_diet(target_data: dict) -> dict:
+def generate_daily_diet(target_data: dict, day_index: int = 1) -> dict:
     macros = target_data["macros"]
     target_p = macros["protein"]["grams"]
     target_c = macros["carbs"]["grams"]
@@ -57,9 +57,19 @@ def generate_daily_diet(target_data: dict) -> dict:
     meal_c = target_c / 3
     meal_f = target_f / 3
     
-    breakfast = create_meal("Desayuno", meal_p, meal_c, meal_f, "egg_whites", "oats", "almonds")
-    lunch = create_meal("Comida", meal_p, meal_c, meal_f, "chicken_breast", "rice_cooked", "olive_oil")
-    dinner = create_meal("Cena", meal_p, meal_c, meal_f, "fish", "potato", "avocado")
+    # Rotación simple para variedad
+    if day_index % 3 == 0:
+        breakfast = create_meal("Desayuno", meal_p, meal_c, meal_f, "egg_whites", "potato", "avocado")
+        lunch = create_meal("Comida", meal_p, meal_c, meal_f, "fish", "rice_cooked", "olive_oil")
+        dinner = create_meal("Cena", meal_p, meal_c, meal_f, "chicken_breast", "oats", "almonds")
+    elif day_index % 2 == 0:
+        breakfast = create_meal("Desayuno", meal_p, meal_c, meal_f, "egg_whites", "oats", "almonds")
+        lunch = create_meal("Comida", meal_p, meal_c, meal_f, "fish", "potato", "olive_oil")
+        dinner = create_meal("Cena", meal_p, meal_c, meal_f, "chicken_breast", "rice_cooked", "avocado")
+    else:
+        breakfast = create_meal("Desayuno", meal_p, meal_c, meal_f, "egg_whites", "oats", "almonds")
+        lunch = create_meal("Comida", meal_p, meal_c, meal_f, "chicken_breast", "rice_cooked", "olive_oil")
+        dinner = create_meal("Cena", meal_p, meal_c, meal_f, "fish", "potato", "avocado")
     
     meals = [breakfast, lunch, dinner]
     
@@ -88,4 +98,17 @@ def generate_daily_diet(target_data: dict) -> dict:
             "carbs": round(diff_c, 1),
             "fat": round(diff_f, 1)
         }
+    }
+
+def generate_14_day_plan(patient_id: int, target_data: dict) -> dict:
+    days = []
+    for day_index in range(1, 15):
+        daily = generate_daily_diet(target_data, day_index)
+        daily["day"] = day_index
+        days.append(daily)
+        
+    return {
+        "patient_id": patient_id,
+        "target": target_data,
+        "days": days
     }

@@ -67,7 +67,13 @@ class DietTotals(BaseModel):
     fat: float
 
 class DailyDietResponse(BaseModel):
+    day: Optional[int] = None
     target: TargetResponse
     meals: list[MealSchema]
     totals: DietTotals
     diff: DietTotals
+
+class DietPlanResponse(BaseModel):
+    patient_id: int
+    target: TargetResponse
+    days: list[DailyDietResponse]
