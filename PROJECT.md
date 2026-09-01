@@ -33,4 +33,9 @@ Backend:
 - **Cálculo de TDEE**: BMR * Factor de actividad.
 - **Unidades**: Peso en kg, Altura en cm, Edad en años.
 - **Factores de actividad**: Sedentario (1.2), Ligero (1.375), Moderado (1.55), Activo (1.725), Muy activo (1.9).
+- **Objetivos Calóricos**: Mantenimiento (TDEE), Pérdida de peso (TDEE - 500 kcal), Ganancia de peso (TDEE + 500 kcal). Se aplica un límite mínimo de seguridad de 1200 kcal.
+- **Macronutrientes**:
+  - Proteínas: 30% del objetivo calórico (4 kcal/g)
+  - Grasas: 30% del objetivo calórico (9 kcal/g)
+  - Carbohidratos: 40% del objetivo calórico (4 kcal/g)
 - **Limitaciones Actuales**: El cálculo se hace bajo demanda (on-the-fly) sin persistencia en base de datos. No incluye ajustes por objetivos, macros o patologías médicas.
